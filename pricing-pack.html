@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Branding Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --ink: #1A1714;
+    --warm-mid: #8B7355;
+    --warm-light: #C9B99A;
+    --accent: #B8391E;
+    --rule: #D6CBBF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    padding: 64px 24px 80px;
+  }
+
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: clamp(42px, 8vw, 68px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto 10px;
+  }
+
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: var(--warm-light);
+    margin: 28px auto;
+  }
+
+  /* ── PITCH BLURB ── */
+  .pitch {
+    text-align: center;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  .pitch p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .pitch p em {
+    font-style: italic;
+    color: var(--warm-mid);
+  }
+
+  /* ── INCLUDES BANNER ── */
+  .includes-banner {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 4px;
+    padding: 22px 28px;
+    margin-bottom: 44px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .includes-banner .icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    color: var(--warm-light);
+  }
+
+  .includes-banner p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--warm-light);
+  }
+
+  .includes-banner strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 16px;
+  }
+
+  /* ── PACKAGES ── */
+  .packages {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .card {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 30px 32px 26px;
+    position: relative;
+    background: #fff;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(26,23,20,0.07);
+    transform: translateY(-2px);
+  }
+
+  .card:nth-child(1) { animation-delay: 0.3s; }
+  .card:nth-child(2) { animation-delay: 0.4s; }
+  .card:nth-child(3) { animation-delay: 0.5s; }
+
+  .card.featured {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 10px;
+  }
+
+  .card.featured .card-tag { color: var(--warm-light); }
+
+  .featured-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 2px;
+  }
+
+  .card-title {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--warm-mid);
+    margin-bottom: 20px;
+    line-height: 1.55;
+  }
+
+  .card.featured .card-desc { color: var(--warm-light); }
+
+  .card-items {
+    list-style: none;
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .card-items li {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+
+  .card.featured .card-items li { color: var(--cream); }
+
+  .card-items li::before {
+    content: '—';
+    color: var(--warm-light);
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 12px;
+  }
+
+  .card.featured .card-items li::before { color: var(--accent); }
+
+  .card-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+  }
+
+  .card.featured .card-price-row { border-color: rgba(255,255,255,0.12); }
+
+  .currency {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--warm-mid);
+  }
+
+  .card.featured .currency { color: var(--warm-light); }
+
+  .price {
+    font-size: 38px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .card.featured .price { color: var(--cream); }
+
+  /* ── ADD-ON ── */
+  .addon-section {
+    margin-top: 16px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.6s forwards;
+  }
+
+  .addon-card {
+    border: 1px dashed var(--warm-light);
+    border-radius: 6px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: rgba(201,185,154,0.06);
+    transition: background 0.2s ease;
+  }
+
+  .addon-card:hover { background: rgba(201,185,154,0.12); }
+
+  .addon-left { flex: 1; min-width: 200px; }
+
+  .addon-title {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+
+  .addon-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.55;
+  }
+
+  .addon-price { text-align: right; flex-shrink: 0; }
+
+  .addon-amount {
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    display: block;
+    line-height: 1.1;
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .per {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--warm-mid);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── WHY SECTION ── */
+  .why {
+    margin-top: 56px;
+    padding-top: 44px;
+    border-top: 1px solid var(--rule);
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.7s forwards;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 24px;
+  }
+
+  .why-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--warm-light);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .why-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 7px;
+  }
+
+  .why-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  .footer-note {
+    text-align: center;
+    margin-top: 56px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.8s forwards;
+  }
+
+  .footer-note p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--warm-mid);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .footer-note strong {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 24px 20px 20px; }
+    .includes-banner { flex-direction: column; gap: 12px; }
+    .why-grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <p class="eyebrow">Personal Branding Services</p>
+    <h1>Own your<br><em>narrative.</em></h1>
+    <div class="rule"></div>
+  </div>
+
+  <!-- PITCH -->
+  <div class="pitch">
+    <p>Most people undersell themselves on paper. I help you build a CV, portfolio, and LinkedIn presence that <em>actually reflects the value you bring</em> — and opens the right doors.</p>
+  </div>
+
+  <!-- INCLUDES BANNER -->
+  <div class="includes-banner">
+    <div class="icon">✦</div>
+    <p><strong>Every package includes 2 strategy calls</strong> — one to understand your experience and background, one to align on direction and goals before we begin.</p>
+  </div>
+
+  <!-- PACKAGES -->
+  <p class="section-label">Packages</p>
+  <div class="packages">
+
+    <div class="card">
+      <p class="card-tag">Starter</p>
+      <h2 class="card-title">CV Rewrite</h2>
+      <p class="card-desc">A sharp, tailored CV that positions you clearly for the roles you're going after.</p>
+      <ul class="card-items">
+        <li>Full CV rewrite — structure, language & positioning</li>
+        <li>ATS-optimised formatting</li>
+        <li>Tailored to your target role & industry</li>
+        <li>2 strategy calls included</li>
+        <li>1 round of revisions</li>
+      </ul>
+      <div class="card-price-row">
+        <span class="currency">₹</span>
+        <span class="price">1,500</span>
+      </div>
+    </div>
+
+    <div class="card featured">
+      <div class="featured-badge">Most Popular</div>
+      <p class="card-tag">Full Package</p>
+      <h2 class="card-title">CV + Portfolio</h2>
+      <p class="card-desc">Everything in the CV package, plus a polished portfolio that shows your work in its best light.</p>
+      <ul class="card-items">
+        <li>Full CV rewrite — structure, language & positioning</li>
+        <li>ATS-optimised formatting</li>
+        <li>Custom portfolio — curated, designed & written</li>
+        <li>Work presented with clear narrative & context</li>
+        <li>2 strategy calls included</li>
+        <li>1 round of revisions on each deliverable</li>
+      </ul>
+      <div class="card-price-row">
+        <span class="currency">₹</span>
+        <span class="price">4,000</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-tag">Standalone</p>
+      <h2 class="card-title">LinkedIn Optimisation</h2>
+      <p class="card-desc">A fully optimised LinkedIn profile that attracts the right opportunities.</p>
+      <ul class="card-items">
+        <li>Headline, summary & experience rewrite</li>
+        <li>Keyword strategy for discoverability</li>
+        <li>Profile positioning for your target audience</li>
+        <li>2 strategy calls included</li>
+        <li>1 round of revisions</li>
+      </ul>
+      <div class="card-price-row">
+        <span class="currency">₹</span>
+        <span class="price">1,000</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADD-ON -->
+  <div class="addon-section">
+    <p class="section-label">Add-on</p>
+    <div class="addon-card">
+      <div class="addon-left">
+        <h3 class="addon-title">LinkedIn Content Plan</h3>
+        <p class="addon-desc">A ready-to-post monthly content plan — topics, formats, and hooks crafted around your voice and positioning goals. Stay visible without the guesswork.</p>
+      </div>
+      <div class="addon-price">
+        <span class="addon-amount">₹ 1,500</span>
+        <span class="per">/ month</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <div class="why">
+    <p class="section-label">Why it works</p>
+    <div class="why-grid">
+      <div>
+        <div class="why-num">01</div>
+        <p class="why-title">Strategy first</p>
+        <p class="why-body">Two calls before a word is written. We understand your goals, your audience, and what makes you different.</p>
+      </div>
+      <div>
+        <div class="why-num">02</div>
+        <p class="why-title">Tailored, not templated</p>
+        <p class="why-body">Every deliverable is built for you — your industry, your voice, your next move. No copy-paste.</p>
+      </div>
+      <div>
+        <div class="why-num">03</div>
+        <p class="why-title">End-to-end presence</p>
+        <p class="why-body">CV, portfolio, LinkedIn — all aligned and telling the same story so you show up consistently everywhere.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <div class="rule"></div>
+    <p>Ready to get started?<br><strong>Book your first call and we'll take it from there.</strong></p>
+  </div>
+
+</div>
+</body>
+</html>
